@@ -27,6 +27,7 @@
 #include <system_error>
 #include <cerrno>
 #include <process.h>
+#include <iostream>
 
 #ifdef _GLIBCXX_HAS_GTHREADS
 #error This version of MinGW seems to include a win32 port of pthreads, and probably    \
@@ -57,6 +58,7 @@ public:
     public:
         explicit id(DWORD aId=0):mId(aId){}
         bool operator==(const id& other) const {return mId == other.mId;}
+        friend std::ostream& operator<<(std::ostream& os, const id& ID) { return os << ID.mId; }
     };
 protected:
     HANDLE mHandle;
